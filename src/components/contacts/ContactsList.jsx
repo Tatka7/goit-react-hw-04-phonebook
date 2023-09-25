@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import css from './ContactsList.module.css';
 
-export default function ContactsList({ contacts, deleteContact }) {
+export default function ContactsList({ filterContacts, deleteContact }) {
   return (
     <ul className={css.list}>
-      {contacts.map(({ id, name, number }) => {
+      {filterContacts.map(({ id, name, number }) => {
         return (
           <li key={id} className={css.item}>
             <span className={css.data}>
