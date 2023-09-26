@@ -55,7 +55,7 @@ export default function App() {
 
   const onFilterChange = evt => {
     const filterValue = evt.currentTarget.value.toLowerCase();
-    this.setState({ filter: filterValue });
+    setFilter(filterValue);
   };
 
   const checkOriginalNames = (contacts, contact) => {
@@ -65,17 +65,22 @@ export default function App() {
   };
 
   const deleteContact = contactId => {
-    this.setState(prevState => {
-      return {
-        contacts: prevState.contacts.filter(({ id }) => id !== contactId),
-      };
-    });
+    // setContacts(prevState => {
+    //   return {
+    //     contacts: prevState.contacts.filter(({ id }) => id !== contactId),
+    //   };
+    // });
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== contactId)
+    );
   };
 
   const filterContacts = () => {
-    const { contacts, filter } = this.state;
+    // const { contacts, filter } = this.state;
     return contacts.filter(({ name }) => name.toLowerCase().includes(filter));
   };
+
+  const filteredContacts = filterContacts();
 
   return (
     <div className={css.container}>
@@ -87,7 +92,7 @@ export default function App() {
           <>
             <Filter changeFilter={onFilterChange} value={filter} />
             <ContactsList
-              contacts={filterContacts}
+              contacts={filteredContacts}
               deleteContact={deleteContact}
             />
           </>
